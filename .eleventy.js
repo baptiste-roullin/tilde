@@ -17,10 +17,10 @@ module.exports = function (config) {
 	config.addPassthroughCopy('./src/*.css')
 	config.addPassthroughCopy('./src/*.js')
 
-	config.addPassthroughCopy('./src/images/*.png')
-	config.addPassthroughCopy('./src/images/*.jpg')
-	config.addPassthroughCopy('./src/images/*.jpeg')
-	config.addPassthroughCopy('./src/images/*.webp')
+	config.addPassthroughCopy('./src/*/*.png')
+	config.addPassthroughCopy('./src/*/*.jpg')
+	config.addPassthroughCopy('./src/*/*.jpeg')
+	config.addPassthroughCopy('./src/*/*.webp')
 	config.addPassthroughCopy('./src/old_2022/')
 
 
@@ -65,20 +65,28 @@ module.exports = function (config) {
 				await Promise.all(dir
 					.map(fileName => gettingCommitedDate(basePath, fileName))
 				)).filter(onlyImages)
-				.sort((a, b) => a.time - b.time)
+				//.sort((a, b) => a.time - b.time)
 				//returning only the name
-				.map(file => { return { img: file.name } })
+				.map(file => {
+					return {
+						img: file.name,
+						date: new Date(file.time * 1000)
+					}
+				})
 				.reverse()
 
 			const mergedCollec = sortedSnaps.concat(posts)
 			return mergedCollec.sort(function (a, b) {
-				return b.date - a.date // sort by date - descending
+				return a.date - b.date
 			})
 		} catch (err) {
 			console.error(err)
 		}
 	})
 
+	config.addFilter('formatDate', function (date) {
+		return date.toLocaleDateString('FR-FR')
+	})
 
 	return {
 		dir: {
