@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Morphogenèses</title>
+		<link rel="stylesheet" href="remarkdown_theme.css"/>
+		<link rel="stylesheet" href="style.css"></link>
+		<link rel="stylesheet" href="dark.css"  media="screen and (prefers-color-scheme: dark)"></link>
+		<link class="dark-manual" rel="stylesheet" href="dark.css"></link>
+		<script defer src="./scriptures.js"></script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	</head>
+	<body data-dark="false" class="remarkdown h1-underline h2-underline">
+		<header>
+			<div>
+				<h1>Morphogenèses</h1>
+				<button class="dark-button">Mode sombre</button>
+			</div>
+		</header>
+
+		<div>
+			<p>Journal visual d'un apprenti en génération de formes.</p>
+			<p>L'ancienne page de ce tilde <a href="./old_2022/index.html">est ici</a>  -- dans un autre tout style.</p>
+		</div>
+
+		<main>
+			{% for post in collections.mergedCollection %}
+
+			{% if post.img %}
+
+				{% if loop.index % 2 %}
+					{% set title = "Ceci" %}
+				{% else  %}
+					{% set title = "Cela" %}
+				{% endif %}
+			{% else %}
+				{% set title = post.data.title %}
+			{% endif %}
+
+			<article class="item" style="">
+				<div>
+					<h2>{{title}}</h2>
+					<a href="#{{loop.index}}">⚓</a>
+					<p>{{post.date}}</p>
+				</div>
+
+			{% if post.img %}
+				<img class="" id="{{loop.index}}" lazy src="./images/{{post.img}}" >
+			{% else  %}
+				{{postContent | safe}}
+			{% endif %}
+
+
+
+				</article>
+			{% endfor %}
+		</main>
+	</body>
+</html>

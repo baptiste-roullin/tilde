@@ -1,0 +1,15 @@
+#!/bin/sh
+USER=boucan
+HOST=ribambelle.club
+DIR=public_html/   # le dossier du serveur que vers lequel voulez synchroniser, ici public_html qui est le dossier sur votre tilde où vous mettez vos pages web
+
+git pull prod origin
+git add .
+git commit -m "deploy"
+git push origin master
+
+npm run build
+
+rsync -avz --delete public_html/ ${USER}@${HOST}:~/${DIR}
+
+exit 0
