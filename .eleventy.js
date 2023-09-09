@@ -77,7 +77,7 @@ module.exports = function (config) {
 
 			const mergedCollec = sortedSnaps.concat(posts)
 			return mergedCollec.sort(function (a, b) {
-				return a.date - b.date
+				return b.date - a.date
 			})
 		} catch (err) {
 			console.error(err)
