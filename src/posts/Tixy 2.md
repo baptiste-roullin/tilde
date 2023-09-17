@@ -1,5 +1,5 @@
 ---
-title: Tixy – tuto #2
+title: Tixy – tuto \#2
 ---
 
 Tentatives d'explications de Tixy, avec différents exemples. C'est un bon exercice.
