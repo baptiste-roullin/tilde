@@ -1,8 +1,8 @@
 ---
-title: Tixy #2
+title: Tixy – tuto #1
 ---
 
-## rtest
+## Tixy #2 : tuto
 
 Tentatives d'explications de Tixy, avec différents exemples. C'est un bon exercice.
 
@@ -32,23 +32,11 @@ i a une valeur croissante, donc le ratio augmente, donc les cercles sont de plus
 
 Après ça on rentre vite dans des subtilités de Javascript, c'est là où Tixy prend tout son sel.
 
+Par exemple
+
 ### [Math.random() < 0.1 ](https://tixy.land/?code=Math.random%28%29+%3C+0.1)
 
 On retourne un booléan qui va être évalué comme vrai ou faux. Si le chiffre est égal à 0.1, on renvoie Vrai, que Javascript convertit en 1. Sinon, on renvoie faux, convertit à zéro.
 
 Tout ça grâce à la [coercition de type](https://developer.mozilla.org/fr/docs/Glossary/Type_coercion).
 
-[1, 0, -1][i%3]
-[...Array(5).keys()].map(e=>(e/5)-.5)[i%5]
-[5463,2194,2386][y+t*9&7]&1<<x-1
-
-x/y - t
-
-sin(x)/3+cos(y)/3
-
-sin(i/t)+cos(i/t)
-sin(i/t)*cos(i/t)
-sin(i/t)*cos(i-t)
-sin(i-t)*cos(i-t)
-
-sin(t-sqrt((x-7.5)**2+(y-6)**2))
