@@ -36,8 +36,56 @@
 
 			<article class="item" style="">
 				<div>
-					<h2>Tixy</h2>
+					<h2>Tixy – tuto</h2>
 					<a href="#1">⚓</a>
+					<p>06/09/2023</p>
+				</div>
+
+			<div>
+				
+					<h2>Tixy #2 : tuto</h2>
+<p>Tentatives d'explications de Tixy, avec différents exemples. C'est un bon exercice.</p>
+<p>Tixy affiche une grille de 16x16 points. Chaque point est commandé par la fonction suivante.</p>
+<p>Paramètres :</p>
+<ul>
+<li>t : le temps en secondes depuis le début de l'animation</li>
+<li>i : la position du point depuis le début de la grille</li>
+<li>x : la position du point la ligne</li>
+<li>y : la position du point dans la colonne</li>
+</ul>
+<p>Valeur de retour attendue :</p>
+<ul>
+<li>un entier entre -1 et 1.</li>
+<li>positif : blanc avec une taille variable. Au-delà de 1, ça équivaut à 1.</li>
+<li>négatif : noir avec une taille variable. Au-delà de -1, ça équivaut à -1.</li>
+<li>zéro : invisible.</li>
+</ul>
+<p>La fonction est exécutée pour chaque point et pour chaque battement de temps. Les arguments auront donc typiquement des valeurs différentes à chaque fois.</p>
+<p>On peut taper <a href="https://tixy.land/?code=1"><code>(t,i,x,y) =&gt; 1</code></a> et obtenir que des cercles blancs. Les paramètres sont ignorés et on retourne toujours 1.</p>
+<h3><a href="https://tixy.land/?code=i+%2F+256">1/256</a></h3>
+<p>i a une valeur croissante, donc le ratio augmente, donc les cercles sont de plus en plus gros.</p>
+<p>Après ça on rentre vite dans des subtilités de Javascript, c'est là où Tixy prend tout son sel.</p>
+<p>Par exemple</p>
+<h3><a href="https://tixy.land/?code=Math.random%28%29+%3C+0.1">Math.random() &lt; 0.1 </a></h3>
+<p>On retourne un booléan qui va être évalué comme vrai ou faux. Si le chiffre est égal à 0.1, on renvoie Vrai, que Javascript convertit en 1. Sinon, on renvoie faux, convertit à zéro.</p>
+<p>Tout ça grâce à la <a href="https://developer.mozilla.org/fr/docs/Glossary/Type_coercion">coercition de type</a>.</p>
+
+				
+			</div>
+
+
+
+				</article>
+			
+
+			
+				
+			
+
+			<article class="item" style="">
+				<div>
+					<h2>Tixy</h2>
+					<a href="#2">⚓</a>
 					<p>06/09/2023</p>
 				</div>
 
@@ -63,31 +111,6 @@
 
 			<article class="item" style="">
 				<div>
-					<h2>Cela</h2>
-					<a href="#2">⚓</a>
-					<p>04/09/2023</p>
-				</div>
-
-			<div>
-				
-					<img class="" id="2" lazy src="./images/truchet4.png" >
-				
-			</div>
-
-
-
-				</article>
-			
-
-			
-
-				
-					
-				
-			
-
-			<article class="item" style="">
-				<div>
 					<h2>Ceci</h2>
 					<a href="#3">⚓</a>
 					<p>04/09/2023</p>
@@ -95,7 +118,7 @@
 
 			<div>
 				
-					<img class="" id="3" lazy src="./images/truchet3.png" >
+					<img class="" id="3" lazy src="./images/truchet4.png" >
 				
 			</div>
 
@@ -120,7 +143,7 @@
 
 			<div>
 				
-					<img class="" id="4" lazy src="./images/truchet2.png" >
+					<img class="" id="4" lazy src="./images/truchet3.png" >
 				
 			</div>
 
@@ -145,7 +168,7 @@
 
 			<div>
 				
-					<img class="" id="5" lazy src="./images/truchet.png" >
+					<img class="" id="5" lazy src="./images/truchet2.png" >
 				
 			</div>
 
@@ -170,7 +193,7 @@
 
 			<div>
 				
-					<img class="" id="6" lazy src="./images/Sans titre9.png" >
+					<img class="" id="6" lazy src="./images/truchet.png" >
 				
 			</div>
 
@@ -195,7 +218,7 @@
 
 			<div>
 				
-					<img class="" id="7" lazy src="./images/Sans titre4.png" >
+					<img class="" id="7" lazy src="./images/Sans titre9.png" >
 				
 			</div>
 
@@ -220,7 +243,7 @@
 
 			<div>
 				
-					<img class="" id="8" lazy src="./images/Sans titre3.png" >
+					<img class="" id="8" lazy src="./images/Sans titre4.png" >
 				
 			</div>
 
@@ -245,7 +268,7 @@
 
 			<div>
 				
-					<img class="" id="9" lazy src="./images/Sans titre2.png" >
+					<img class="" id="9" lazy src="./images/Sans titre3.png" >
 				
 			</div>
 
@@ -270,7 +293,7 @@
 
 			<div>
 				
-					<img class="" id="10" lazy src="./images/Sans titre111.png" >
+					<img class="" id="10" lazy src="./images/Sans titre2.png" >
 				
 			</div>
 
@@ -295,7 +318,7 @@
 
 			<div>
 				
-					<img class="" id="11" lazy src="./images/Sans titre10.png" >
+					<img class="" id="11" lazy src="./images/Sans titre111.png" >
 				
 			</div>
 
@@ -320,7 +343,7 @@
 
 			<div>
 				
-					<img class="" id="12" lazy src="./images/Sans titre.png" >
+					<img class="" id="12" lazy src="./images/Sans titre10.png" >
 				
 			</div>
 
@@ -345,7 +368,7 @@
 
 			<div>
 				
-					<img class="" id="13" lazy src="./images/999.png" >
+					<img class="" id="13" lazy src="./images/Sans titre.png" >
 				
 			</div>
 
@@ -370,7 +393,7 @@
 
 			<div>
 				
-					<img class="" id="14" lazy src="./images/1002.png" >
+					<img class="" id="14" lazy src="./images/999.png" >
 				
 			</div>
 
@@ -395,7 +418,7 @@
 
 			<div>
 				
-					<img class="" id="15" lazy src="./images/1001.png" >
+					<img class="" id="15" lazy src="./images/1002.png" >
 				
 			</div>
 
@@ -420,7 +443,7 @@
 
 			<div>
 				
-					<img class="" id="16" lazy src="./images/10006.png" >
+					<img class="" id="16" lazy src="./images/1001.png" >
 				
 			</div>
 
@@ -445,7 +468,7 @@
 
 			<div>
 				
-					<img class="" id="17" lazy src="./images/10005.png" >
+					<img class="" id="17" lazy src="./images/10006.png" >
 				
 			</div>
 
@@ -470,7 +493,32 @@
 
 			<div>
 				
-					<img class="" id="18" lazy src="./images/1000.png" >
+					<img class="" id="18" lazy src="./images/10005.png" >
+				
+			</div>
+
+
+
+				</article>
+			
+
+			
+
+				
+					
+				
+			
+
+			<article class="item" style="">
+				<div>
+					<h2>Ceci</h2>
+					<a href="#19">⚓</a>
+					<p>04/09/2023</p>
+				</div>
+
+			<div>
+				
+					<img class="" id="19" lazy src="./images/1000.png" >
 				
 			</div>
 
