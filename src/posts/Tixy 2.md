@@ -30,7 +30,7 @@ i a une valeur croissante, donc le ratio augmente, donc les cercles sont de plus
 
 Après ça on rentre vite dans des subtilités de Javascript, c'est là où Tixy prend tout son sel.
 
-Par exemple
+Par exemple :
 
 ### [Math.random() < 0.1 ](https://tixy.land/?code=Math.random%28%29+%3C+0.1)
 
