@@ -6,7 +6,8 @@
   },
   "scripts": {
     "dev": "eleventy --incremental --serve",
-    "build": "eleventy  --incremental"
+    "build": "eleventy  --incremental",
+    "deploy": "bash ./deploy.sh"
   },
   "devDependencies": {
     "@11ty/eleventy": "v2.0.1"
