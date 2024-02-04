@@ -22,15 +22,28 @@ module.exports = function (config) {
 	config.addPassthroughCopy('./src/*/*.jpeg')
 	config.addPassthroughCopy('./src/*/*.webp')
 	config.addPassthroughCopy('./src/old_2022/')
+	config.addPassthroughCopy('./src/*/*.webm')
 
 
 
 	config.addCollection("mergedCollection", async function (collections) {
 
 		function onlyImages(file) {
-			const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp)$/g)
+			const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp|webm)$/g)
 			if (isImage.test(file.name)) {
 				return true
+			}
+			else { return false }
+		}
+
+
+		function isVideo(file) {
+			const isVideo = new RegExp(/\.(mp4|webm)$/g)
+			if (isVideo.test(file.name)) {
+				return true
+			}
+			else {
+				return false
 			}
 		}
 
@@ -65,12 +78,19 @@ module.exports = function (config) {
 				await Promise.all(dir
 					.map(fileName => gettingCommitedDate(basePath, fileName))
 				)).filter(onlyImages)
-				//.sort((a, b) => a.time - b.time)
-				//returning only the name
 				.map(file => {
-					return {
-						img: file.name,
+
+					let data = {
 						date: new Date(file.time * 1000)
+					}
+					if (isVideo(file)) {
+						data.name = file.name
+						data.vid = true
+						return data
+					} else {
+						data.name = file.name
+						data.img = true
+						return data
 					}
 				})
 				.reverse()

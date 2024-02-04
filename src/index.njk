@@ -29,34 +29,34 @@
 
 		<main>
 			{% for post in collections.mergedCollection %}
+				{% if post.name %}
 
-			{% if post.img %}
-
-				{% if loop.index % 2 %}
-					{% set title = "Ceci" %}
-				{% else  %}
-					{% set title = "Cela" %}
+					{% if loop.index % 2 %}
+						{% set title = "Ceci" %}
+					{% else  %}
+						{% set title = "Cela" %}
+					{% endif %}
+				{% else %}
+					{% set title = post.data.title %}
 				{% endif %}
-			{% else %}
-				{% set title = post.data.title %}
-			{% endif %}
 
-			<article class="item" style="">
+				<article class="item" style="">
+					<div>
+						<h2>{{title}}</h2>
+						<a href="#{{loop.index}}">⚓</a>
+						<p>{{post.date | formatDate }}</p>
+					</div>
+
 				<div>
-					<h2>{{title}}</h2>
-					<a href="#{{loop.index}}">⚓</a>
-					<p>{{post.date | formatDate }}</p>
+					{% if post.img %}
+						<img class="" id="{{loop.index}}" loading="lazy" src="./images/{{post.name}}" >
+					{% elif post.vid %}
+						<video class="" width="100%" height="auto" controls id="{{loop.index}}" loading="lazy" loop src="./images/{{post.name}}" >
+					{% else  %}
+						{{post.content | safe}}
+					{% endif %}
+
 				</div>
-
-			<div>
-				{% if post.img %}
-					<img class="" id="{{loop.index}}" lazy src="./images/{{post.img}}" >
-				{% else  %}
-					{{post.content | safe}}
-				{% endif %}
-			</div>
-
-
 
 				</article>
 			{% endfor %}
