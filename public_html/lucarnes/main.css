@@ -1,0 +1,27 @@
+@media screen and (max-width: 600px) {
+  html,
+  body {
+    margin: 0;
+  }
+  main {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+    scroll-snap-stop: normal;
+    scroll-padding-top: 4em;
+    overflow: auto;
+    scroll-snap-type: both mandatory;
+    /*    overscroll-behavior-y: contain;
+*/
+    height: 500px;
+  }
+
+  main iframe {
+    width: 95vw;
+    margin: auto;
+    height: 60dvh;
+    overflow: hidden;
+    display: block;
+  }
+}
