@@ -35,7 +35,7 @@ export default function (config) {
 	config.setLibrary(
 		"md",
 		markdownIt(options).use(html5Media, {
-			videoAttrs: 'width="100%" height="auto" controls" loading="lazy" loop',
+			videoAttrs: 'width="100%" height="auto" controls loading="lazy" loop',
 		}),
 	)
 
