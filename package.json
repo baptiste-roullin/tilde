@@ -4,12 +4,14 @@
   "engines": {
     "node": "20.0.0"
   },
+  "type": "module",
   "scripts": {
-    "dev": "eleventy --incremental --serve",
+    "dev": "eleventy --serve",
     "build": "eleventy  --incremental",
     "deploy": "bash ./deploy.sh"
   },
   "devDependencies": {
-    "@11ty/eleventy": "v2.0.1"
-  }
+    "@11ty/eleventy": "4.0.0-alpha.6"
+  },
+  "dependencies": {}
 }

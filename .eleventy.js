@@ -1,9 +1,11 @@
-const util = require("node:util")
-const exec = util.promisify(require("node:child_process").exec)
+import util from "node:util"
+import { exec } from "node:child_process"
+import markdownIt from "markdown-it"
+import { html5Media } from "./src/markdown-it-html5-media.js"
+import { readdir, stat } from "node:fs/promises"
+const pExec = util.promisify(exec)
 
-module.exports = function (config) {
-	const { readdir, stat } = require("fs/promises")
-
+export default function (config) {
 	config.addWatchTarget("./src/assets/css/")
 	config.addWatchTarget("./src/assets/scripts/")
 	config.addWatchTarget("./src/*.js")
@@ -21,10 +23,25 @@ module.exports = function (config) {
 	config.addPassthroughCopy("./src/*/*.webp")
 	config.addPassthroughCopy("./src/old_2022/")
 	config.addPassthroughCopy("./src/*/*.webm")
+	config.addPassthroughCopy("./src/*/*.mp4")
+
+	let options = {
+		html: true,
+		breaks: true,
+		linkify: true,
+		typographer: true,
+	}
+
+	config.setLibrary(
+		"md",
+		markdownIt(options).use(html5Media, {
+			videoAttrs: 'width="100%" height="auto" controls" loading="lazy" loop',
+		}),
+	)
 
 	config.addCollection("mergedCollection", async function (collections) {
 		function onlyImages(file) {
-			const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp|webm)$/g)
+			const isImage = new RegExp(/\.(png|jpg|jpeg|gif|webp|webm|mp4)$/g)
 			if (isImage.test(file.name)) {
 				return true
 			} else {
@@ -44,8 +61,9 @@ module.exports = function (config) {
 		async function gettingCommitedDate(basePath, fileName) {
 			const { name } = fileName
 			const command = `git log -1 --pretty=\"format:%ct\" \"${basePath}\/${name}\"`
+
 			try {
-				const { stdout } = await exec(command)
+				const { stdout } = await pExec(command)
 				return {
 					name,
 					time: Number(stdout),
@@ -58,7 +76,7 @@ module.exports = function (config) {
 				}
 				const metadata = await stat(`${basePath}/${name}`)
 				return {
-					name,
+					name: name,
 					time: metadata.mtime.getTime(),
 				}
 			}
@@ -92,6 +110,7 @@ module.exports = function (config) {
 				})
 				.reverse()
 
+			// ajout des posts .md
 			const mergedCollec = sortedSnaps.concat(posts)
 			return mergedCollec.sort(function (a, b) {
 				return b.date - a.date

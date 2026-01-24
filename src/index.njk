@@ -44,15 +44,19 @@
 						{% if post.img %}
 							<img class="" id="{{loop.index}}" loading="lazy" src="./images/{{post.name}}" >
 						{% elif post.vid %}
-							<video class="" width="100%" height="auto" controls id="{{loop.index}}" loading="lazy" loop src="./images/{{post.name}}" >
-							{% else  %}
-								{{post.content | safe}}
-							{% endif %}
+							<video class="" width="100%" height="auto" controls id="{{loop.index}}" loading="lazy" loop src="./images/{{post.name}}"></video>
+						{% else  %}
+							{{post.content | safe}}
+						{% endif %}
 
-						</div>
+					</div>
 
-					</article>
-				{% endfor %}
-			</main>
-		</body>
-	</html>
+				</article>
+			{% endfor %}
+		</main>
+		<footer>
+			<h2>Pied de page</h2>
+			<div class="text"></div>
+		</footer>
+	</body>
+</html>
