@@ -122,5 +122,5 @@ document.querySelector("footer div").innerHTML =
 	`<p>Vous êtes le ${randomItem(visitor)} visiteur.</p>
 	 <p>Je détecte que vous utilisez le navigateur ${randomItem(browser)} version ${version} avec un impeccable panache.</p>
 	 <p>Votre écran comporte ${window.screen.width * window.screen.height * (2 * window.devicePixelRatio)} pixels.</p>
-	 <p>Votre visite ${randomItem(ame)}. </p>
+	 <p>Votre visite étincèle dans les logs de mon serveur</p>
 	 `
