@@ -2,13 +2,11 @@
     margin: auto;
 
     height: 100%;
-    overflow-x: hidden
   }
   body {
     margin: auto auto auto 5vw;
 
     height: 100%;
-    overflow-x: hidden
   }
 
   h1 {
@@ -46,6 +44,10 @@
 }
 
 @media screen and (max-width: 600px) {
+  body {
+        overflow-x: hidden
+
+  }
     main{flex-direction: column;}
 
 }
