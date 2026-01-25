@@ -1,3 +1,30 @@
+var observer = new MutationObserver(function (records) {
+	const iframes = document.querySelectorAll("article iframe")
+	console.log(iframes.length)
+	for (let i = 0; i < iframes.length; i++) {
+
+		iframes[i].addEventListener("load", function (e) {
+			//console.log("load iframe", e.target.getAttribute("src"))
+			const el = e.target.parentElement
+			//console.log(e.timeStamp)
+
+			//if (e.timeStamp < 6000) {
+			el.children[0].style.display = "none"
+			el.children[1].classList.remove("hidden-iframe")
+			//}
+			//tester délai avec https://bettycollober.fr/en-ce-moment
+		})
+	}
+})
+
+const main = document.getElementById("main")
+
+observer.observe(main, {
+	childList: true,
+	characterData: true
+})
+
+
 const sourcesURL = [
 	"https://ribambelle.club/~cabanes",
 	"https://ribambelle.club/~castor-aimable",
@@ -6,6 +33,44 @@ const sourcesURL = [
 	"https://ribambelle.club/~boucan",
 	"https://ribambelle.club/~slowpy",
 	"https://ribambelle.club/~kamouth",
+	"https://ribambelle.club/~zoutof",
+	"https://accentgrave.net/now/",
+	"https://philippe-castelneau.com/en-ce-moment/",
+	"https://julianoe.eu.org/en-ce-moment",
+	"https://lamecarlate.net/en-ce-moment",
+	"https://justman.fr/now",
+	"https://tangee.fr/now/",
+	"https://www.6x8.org/en-ce-moment",
+	"https://nota-bene.org/now",
+	"https://themimitoof.fr/now",
+	"https://11d.im/now/",
+	"https://sima78.chispa.fr…x.php?pages/En-ce-moment",
+	"https://villepreux.net/now",
+	"https://fourbi.eu/en-ce-moment",
+	"https://claudeaubry.fr/now/",
+	"https://www.ffoodd.fr/now/",
+	"https://timotheejulien.fr/en-ce-moment/",
+	"https://cybercarnet.lahm…b.net/index.php?page=now",
+	"https://blog.erreur503.xyz/en-ce-moment/",
+	"https://kevinronceray.com/now",
+	"https://herve.bzh/now/",
+	"https://dimitriregnier.net/now",
+	"https://louphole.com/a-propos/#now",
+	"https://gersande.com/blogue/now/",
+	"https://www.pachyderme.net/now",
+	"https://timothee.goguely.com/now",
+	"https://blog.poslovitch.fr/en-ce-moment",
+	"https://julietterobert.com/en-ce-moment",
+	"https://bettycollober.fr/en-ce-moment",
+	"https://www.couchet.org/#now",
+	"https://nico.nacq.me/now",
+	"https://omer.mobi/maintenant",
+	"http://www.enroweb.com/now.html",
+	"https://luce.carevic.eu/fr/now",
+	"https://www.nicolas-hoffmann.net/source/now.php",
+	"https://hello-bokeh.fr/now",
+	"https://www.nicolas-birckel.fr/now/",
+	"https://www.atlza.com/now/",
 	"https://wiki.xxiivv.com",
 	"https://electro.pizza",
 	"https://avanier.dev",
@@ -246,25 +311,28 @@ const sourcesURL = [
 	"https://l1zb3th.online",
 ]
 
-let iframes = ""
 
-for (let index = 0; index < sourcesURL.length; index++) {
-	/*try {
-											  //resArray[index] = await fetch(sourcesURL[index], { mode: "cors" })
-										  } catch (error) {
-											  console.log(error)
-										  }*/
-	iframes += `
-				<div>
-					<iframe
-					id="${sourcesURL[index]}"
-					src="${sourcesURL[index]}"
-					loading="lazy"
-					scrolling="yes">
-					</iframe>
-				</div>
-				`
-}
-document.querySelector("body main").innerHTML = iframes
+let elements = []
+document.addEventListener("DOMContentLoaded", async (e) => {
+
+	const main = document.querySelector("body main")
+	for (let index = 0; index < sourcesURL.length; index++) {
+
+
+		let element = document.createElement("article")
+		element.innerHTML = `<div class="fallback"> <p>🌃</p></div>
+		<iframe
+		class="hidden-iframe"
+		id="${sourcesURL[index]}"
+		src="${sourcesURL[index]}"
+		loading="lazy"
+		scrolling="yes">
+		</iframe>`
+		elements.push(element)
+
+	}
+	main?.append(...elements)
+})
+
 
 export { }
