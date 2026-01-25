@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 			src='${sourcesURL[index]}'
 			loading='lazy'
 			scrolling='yes'
-			referrerpolicy='origin'>
+			referrerpolicy='no-referrer'>
 		</iframe>`
 		elements.push(element)
 
