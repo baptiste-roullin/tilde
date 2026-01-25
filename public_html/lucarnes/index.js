@@ -1,6 +1,5 @@
 var observer = new MutationObserver(function (records) {
 	const iframes = document.querySelectorAll("article iframe")
-	console.log(iframes.length)
 	for (let i = 0; i < iframes.length; i++) {
 
 		iframes[i].addEventListener("load", function (e) {
@@ -326,7 +325,8 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 		id="${sourcesURL[index]}"
 		src="${sourcesURL[index]}"
 		loading="lazy"
-		scrolling="yes">
+		scrolling="yes"
+		referrerpolicy="origin"
 		</iframe>`
 		elements.push(element)
 
