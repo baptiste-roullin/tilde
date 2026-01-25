@@ -319,14 +319,17 @@ document.addEventListener("DOMContentLoaded", async (e) => {
 
 
 		let element = document.createElement("article")
-		element.innerHTML = `<div class="fallback"> <p>🌃</p></div>
-		<iframe
-		class="hidden-iframe"
-		id="${sourcesURL[index]}"
-		src="${sourcesURL[index]}"
-		loading="lazy"
-		scrolling="yes"
-		referrerpolicy="origin"
+		element.innerHTML = `
+	<div class='fallback'>
+		<p>🌃</p>
+	</div>
+	<iframe
+			class="hidden-iframe"
+			id='${sourcesURL[index]}'
+			src='${sourcesURL[index]}'
+			loading='lazy'
+			scrolling='yes'
+			referrerpolicy='origin'>
 		</iframe>`
 		elements.push(element)
 
