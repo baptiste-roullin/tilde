@@ -1,27 +1,51 @@
-@media screen and (max-width: 600px) {
-  html,
-  body {
-    margin: 0;
-  }
-  main {
+  html {
     margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4em;
-    scroll-snap-stop: normal;
-    scroll-padding-top: 4em;
-    overflow: auto;
-    scroll-snap-type: both mandatory;
-    /*    overscroll-behavior-y: contain;
-*/
-    height: 500px;
+
+    height: 100%;
+    overflow-x: hidden
+  }
+  body {
+    margin: auto auto auto 5vw;
+
+    height: 100%;
+    overflow-x: hidden
   }
 
-  main iframe {
-    width: 95vw;
-    margin: auto;
-    height: 60dvh;
-    overflow: hidden;
-    display: block;
+  h1 {
+  width: 95vw;
+
   }
+  main {
+    margin: 0 0 0 5vw;
+    display: flex;
+    flex-direction: row;
+    gap: 3.5em;
+/*  scroll-snap-stop: normal;
+    scroll-padding-top: 0;
+    overscroll-behavior-y: contain;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 0 0 10px;
+     */
+    width: fit-content;
+    margin: 0;
+    eight: fit-content;
+  }
+
+
+
+  main iframe {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  main > div {
+    flex: 1 1 73vh;
+    width: 90vw;
+    scroll-snap-align: start;
+}
+
+@media screen and (max-width: 600px) {
+    main{flex-direction: column;}
+
 }
