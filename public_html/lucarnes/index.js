@@ -250,21 +250,21 @@ let iframes = ""
 
 for (let index = 0; index < sourcesURL.length; index++) {
 	/*try {
-										  //resArray[index] = await fetch(sourcesURL[index], { mode: "cors" })
-									  } catch (error) {
-										  console.log(error)
-									  }*/
-
-	iframes += `<div><iframe
-  id="${sourcesURL[index]}"
-
-  src="${sourcesURL[index]}"
-  loading="lazy"
-  scrolling="no">
-</iframe></div>`
+											  //resArray[index] = await fetch(sourcesURL[index], { mode: "cors" })
+										  } catch (error) {
+											  console.log(error)
+										  }*/
+	iframes += `
+				<div>
+					<iframe
+					id="${sourcesURL[index]}"
+					src="${sourcesURL[index]}"
+					loading="lazy"
+					scrolling="yes">
+					</iframe>
+				</div>
+				`
 }
 document.querySelector("body main").innerHTML = iframes
-
-//document.addEventListener(windowresize, listener)
 
 export { }
