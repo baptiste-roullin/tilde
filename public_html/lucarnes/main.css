@@ -1,4 +1,10 @@
-  html {
+:root {
+  --border-grey: #b7ceed;
+  --bg-grey: #e7ebf2
+}
+
+
+html {
     margin: auto;
 
     height: 100%;
@@ -9,6 +15,12 @@
     height: 100%;
   }
 
+h1 {
+  margin: 0 0 .2em 0
+}
+header {
+  margin: 1.2em 0
+}
 
   main {
     margin: auto;
@@ -19,9 +31,10 @@
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scroll-padding: 0 0 0 10px;
-  width: 95vw;
+    width: 95vw;
     margin: 0;
     height: fit-content;
+    padding-bottom: .8em;
   }
 
 
@@ -42,7 +55,7 @@
     }
 
     article .fallback {
-      background: #b7ceed;
+      background: var(--grey);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -51,24 +64,30 @@
       font-size: 5em
     }
 
-@media screen and (max-width: 600px) {
+    .hidden-iframe {
+      height: 0%;
+      width: 0%;
+      border: none;
+    }
+@media screen and (max-width: 500px) {
   body {
         overflow-x: hidden
   }
-
-}
-
-.hidden-iframe {
-  height: 0%;
-  width: 0%;
-  border: none;
 }
 
 
-@media screen and (min-width: 600px) {
-  header span {
-    font-size: 1.5em;
+
+@media screen and (min-width: 500px) {
+  header button {
+    font-size: 1.3em;
     cursor: pointer;
+    border: none;
+    padding: .2em .3em;
+    border-radius: 20em;
+    font-weight: 800;
+    background: var(--bg-grey);
+
+
   }
   h1 {
     display:inline-block;
