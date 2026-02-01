@@ -1,15 +1,16 @@
-const main = document.getElementById("main")
 import sourcesURL from "./sources.js"
+
+const main = document.getElementById("main")
+let navIsetup = false
 
 let sources = sourcesURL.slice() // duplicate import into mutable array
 
 
 function showFrames(elems) {
-	//const iframes = document.querySelectorAll("article iframe")
 	for (let i = 0; i < elems.length; i++) {
 
 		elems[i].children[1].addEventListener("load", function (e) {
-			//console.log("load iframe", e.target.getAttribute("src"))
+			console.log("load iframe", e.target.getAttribute("src"))
 			const el = e.target.parentElement
 			console.log(e.target.src, e.timeStamp)
 
@@ -21,7 +22,37 @@ function showFrames(elems) {
 		})
 	}
 }
+
+function setupNavigation() {
+
+	navIsetup = true
+	//quand l'attribut 'container' sera supporté, on pourra juste faire sur l'item:
+	//scrollIntoView({ block: "end", inline: "nearest", , container: "nearest" })
+
+	//logique du calcul de main.scrollLeft - itemSize
+	// main.scrollLeft : c'est à quel point on a scrollé dans le conteneur
+	// itemSize : c'est la bordure gauche du second item. Ca équivaut donc à la largeur d'un item + la largeur gap.
+	// Tous les items sont de même taille, donc on peut s'en servir comme référence.
+	const itemSize = main?.children[1].getBoundingClientRect().x
+
+	document.querySelector("nav .previous").addEventListener("click", (e) => {
+		e.preventDefault()
+		const main = document.getElementById("main")
+		main.scroll({ top: 0, left: main.scrollLeft - itemSize })
+	})
+
+	document.querySelector("nav .next").addEventListener("click", (e) => {
+		e.preventDefault()
+		const main = document.getElementById("main")
+		main.scroll({ top: 0, left: main.scrollLeft + itemSize })
+	})
+}
 function doStuffafterDOMChange(records) {
+
+
+	if (!navIsetup) {
+		setupNavigation()
+	}
 	const addedNodes = records[0].addedNodes
 	//showFrames(addedNodes)
 
@@ -41,27 +72,31 @@ function doStuffafterDOMChange(records) {
 
 function insertSomeFrames(x) {
 	let elements = []
-	console.log("length", sources.length)
-
 	const main = document.querySelector("body main")
-	for (let index = 0; index < x; index++) {
+
+	const array = sources.splice(0, x)
+	for (let index = 0; index < array.length; index++) {
 		let element = document.createElement("article")
 		element.setAttribute("id", "item" + index)
 		element.innerHTML = `
 		<iframe
 		id='iframe${index}'
-		src='${sources[index]}'
+		src='${array[index]}'
 		loading='lazy'
 		scrolling='yes'
 		referrerpolicy='no-referrer'>
 		</iframe>`
-		sources.splice(index, 1)
 		elements.push(element)
 	}
 	main?.append(...elements)
 }
 
+function doStuffAfterInitialLoad(e) {
 
+	if (sources.length) {
+		insertSomeFrames(5)
+	}
+}
 
 
 // The flow is:
@@ -94,11 +129,5 @@ changeObserver.observe(main, {
 })
 
 
-
-function doStuffAfterInitialLoad(e) {
-	if (sources.length) {
-		insertSomeFrames(5)
-	}
-}
 export { }
 
