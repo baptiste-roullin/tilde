@@ -41,9 +41,9 @@ main {
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
   scroll-padding: 0;
-//width: var(--width);
+  width: var(--width);
   margin: 0;
-  height: fit-content;
+  height: 85dvh;
   padding-bottom: .8em;
   scroll-behavior: smooth;
 }
