@@ -1,6 +1,19 @@
 :root {
-  --border-grey: #b7ceed;
-  --bg-grey: #e7ebf2
+  --light-grey: #b7ceed;
+  --lighter-grey: #e7ebf2;
+  --dark-grey: #738193;
+  --width: 95vw;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main {
+        scroll-behavior: instant;
+  }
+
+}
+
+html, body {
+  scroll-behavior: smooth;
 }
 
 
@@ -9,66 +22,105 @@ html {
 
     height: 100%;
   }
-  body {
-    margin: auto auto auto;
-    padding-left: 0.4em;
-    height: 100%;
-  }
+
+body {
+  margin: auto auto auto;
+  padding-left: 0.4em;
+  height: 100%;
+}
+
+
+
+
+main {
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 3.5em;
+  scroll-padding-top: 0;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0;
+  width: var(--width);
+  margin: 0;
+  height: 85dvh;
+  padding-bottom: .8em;
+  scroll-behavior: smooth;
+}
+
+main > article {
+  flex: 0 0 var(--width);
+  scroll-snap-align: start;
+}
+
+main article > iframe {
+  width: 100%;
+  height: 85dvh;
+  box-sizing: border-box;
+  border: 2px solid var(--dark-grey)
+}
+main article > div {
+  width: 100%;
+  height: 85dvh;
+  box-sizing: border-box;
+}
+
+article .fallback {
+  background: var(--light-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+article .fallback p {
+  font-size: 5em
+}
+
+.hidden-iframe {
+  height: 0%;
+  width: 0%;
+  border: none;
+}
+
 
 h1 {
-  margin: 0 0 .2em 0
+  margin: 0 0  0
 }
 header {
   margin: 1.2em 0
 }
 
-  main {
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-    gap: 3.5em;
-    scroll-padding-top: 0;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 0 0 10px;
-    width: 95vw;
-    margin: 0;
-    height: fit-content;
-    padding-bottom: .8em;
+
+header > *{
+  align-items: center;
+  display: flex;
+}
+
+  header button, header a {
+    cursor: pointer;
+    border: none;
+    border-radius: 20em;
+    font-weight: 800;
+    background: var(--light-grey);
+  }
+
+header nav a {
+  text-decoration: none;
+  height: 1em;
+  padding: 0.12em .5em 0.35em;
+  font-size: 1.5em
+
+
+}
+
+header .title button {
+  padding: 0.3em 0.6em;
+  font-size: 1.2em;
   }
 
 
-  main > article {
-    flex: 0 0 97%;
-    scroll-snap-align: start;
-  }
 
-    main article > iframe {
-      min-width: 100%;
-      height: 85dvh;
-      box-sizing: border-box;
-    }
-    main article > div {
-      min-width: 100%;
-      height: 40dvh;
-      box-sizing: border-box;
-    }
 
-    article .fallback {
-      background: var(--grey);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    article .fallback p {
-      font-size: 5em
-    }
 
-    .hidden-iframe {
-      height: 0%;
-      width: 0%;
-      border: none;
-    }
 @media screen and (max-width: 500px) {
   body {
         overflow-x: hidden
@@ -76,23 +128,27 @@ header {
 }
 
 
-
 @media screen and (min-width: 500px) {
-  header button {
+  header button, header a {
     font-size: 1.3em;
-    cursor: pointer;
-    border: none;
-    padding: .2em .3em;
-    border-radius: 20em;
-    font-weight: 800;
-    background: var(--bg-grey);
-
-
   }
+
   h1 {
     display:inline-block;
   }
-  header h1 {
+  .title h1 {
     padding-right: 1em
   }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    width: var(--width);
+
+  }
+  nav {
+    display: flex;
+    gap: 1.2em;
+  }
 }
+
