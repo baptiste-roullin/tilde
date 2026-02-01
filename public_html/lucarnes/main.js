@@ -1,4 +1,4 @@
-import sourcesURL from "./sources.js"
+import { sourcesURL } from "./sources.js"
 
 const main = document.getElementById("main")
 let navIsetup = false
@@ -81,9 +81,10 @@ function insertSomeFrames(x) {
 		element.innerHTML = `
 		<iframe
 		id='iframe${index}'
-		src='${array[index]}'
+		src='${array[index][1]}'
 		loading='lazy'
 		scrolling='yes'
+		title='${array[index][0]}'
 		referrerpolicy='no-referrer'>
 		</iframe>`
 		elements.push(element)
