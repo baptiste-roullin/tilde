@@ -30,8 +30,6 @@ body {
 }
 
 
-
-
 main {
   margin: auto;
   display: flex;
@@ -112,6 +110,11 @@ header nav a {
 
 }
 
+nav {
+  display: flex;
+  gap: 1.2em;
+}
+
 header .title button {
   padding: 0.3em 0.6em;
   font-size: 1.2em;
@@ -124,6 +127,9 @@ header .title button {
 @media screen and (max-width: 500px) {
   body {
         overflow-x: hidden
+  }
+  h1 {
+    margin-right: .5em;
   }
 }
 
@@ -146,9 +152,6 @@ header .title button {
     width: var(--width);
 
   }
-  nav {
-    display: flex;
-    gap: 1.2em;
-  }
+
 }
 
