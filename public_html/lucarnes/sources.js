@@ -1,5 +1,5 @@
 export default [
-	"https://ribambelle.club/~cabanes",
+	"https://ribambelle.club/~cabanes/",
 	"https://ribambelle.club/~castor-aimable/",
 	"https://ribambelle.club/~llaq/",
 	"https://ribambelle.club/~nouckey/",
