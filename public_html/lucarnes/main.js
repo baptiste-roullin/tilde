@@ -77,7 +77,6 @@ function insertSomeFrames(x) {
 	const array = sources.splice(0, x)
 	for (let index = 0; index < array.length; index++) {
 		let element = document.createElement("article")
-		element.setAttribute("id", "item" + index)
 		element.innerHTML = `
 		<iframe
 		id='iframe${index}'
