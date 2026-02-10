@@ -1,1 +1,0 @@
-function t(){createCanvas(480,480,"webgl"),frameRate(30)}function a(){background(0),normalMaterial(),rotateX(frameCount*.02),rotateY(frameCount*.03),torus(width*.2,width*.1,64,64)}export{a as draw,t as setup};
