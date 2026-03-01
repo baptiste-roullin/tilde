@@ -8,9 +8,9 @@ git add .
 git commit -m "deploy"
 git push origin master
 
-cd ./morphogeneses/
-npm run build
+
 cd ./persistes/
+npm run build
 rsync -avz --delete public_html/ ${USER}@${HOST}:~/${DIR}
 
 exit 0
