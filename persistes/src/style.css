@@ -1,6 +1,36 @@
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 1em;
+	font-size: 2em;
+}
+
+body, html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	gap: 2em;
+}
+
+footer {
+  justify-content: center;
+  display: flex;
+  top: 1em;
+}
+
 @view-transition {
 	navigation: none;
-			}
+	}
 
 @keyframes move-out {
 	from {
@@ -23,10 +53,13 @@
 }
 
 /* Apply the custom animation to the old and new page states */
-::view-transition-old(root) {
-	animation: 0.4s ease-in both move-out;
+::view-transition-old(header) {
+	animation: 0.2s ease-in both move-out;
 }
 
-::view-transition-new(root) {
-	animation: 0.4s ease-in both move-in;
+::view-transition-new(header) {
+	animation: 0.2s ease-in both move-in;
+}
+h1 {
+	view-transition-name: header
 }

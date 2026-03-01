@@ -37,9 +37,9 @@ export default function (config) {
 						up = `/${slugify(wordsList[y - 1])}.html`
 					}
 
-					//on checke les liens verticaux à ajouter
+					//on checke les liens horizontaux à ajouter
 					// en  vérifiant les colonnes de structure différente
-
+					// y > 0 : pour lien droite désactivé au niveau de "tu persistes"
 					if (x < wordsGrid.length - 1 && y > 0) {
 						var rightList = wordsGrid[x + 1]
 						if (y < rightList.length) {
@@ -94,6 +94,7 @@ export default function (config) {
 				}
 				return item
 			})
+		console.log(res)
 
 		return res
 	})
