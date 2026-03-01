@@ -1,0 +1,14 @@
+body {
+	background: #191423;
+	color: white;
+}
+
+a {
+	color: #f84d4d;
+}
+
+
+.remarkdown ::before, .remarkdown ::after
+ {
+	color:white
+}
