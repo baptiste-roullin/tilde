@@ -1,0 +1,16 @@
+{
+  "name": "prout",
+  "version": "0.2.0",
+  "engines": {
+    "node": "20.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy  --incremental"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "4.0.0-alpha.6"
+  },
+  "dependencies": {}
+}
