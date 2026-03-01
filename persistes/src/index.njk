@@ -1,0 +1,50 @@
+---
+pagination:
+  data: collections.everything
+  size: 1
+  alias: word
+permalink: "{% if pagination.pageNumber == 0 %}/index.html{% else %}/{{ word.href }}.html{% endif %}"
+---
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Tu persistes ↢↣</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body >
+		<main>
+			<p>{{word.word}}</p>
+			{% if word.hrefUp %}
+				{% if pagination.pageNumber == 1 %}
+					<a href="/">haut</a>
+				{% else %}
+					<a href="{{word.hrefUp}}">haut</a>
+				{% endif %}
+			{% else  %}
+				<a aria-disabled>haut</a>
+			{%endif %}
+
+			{% if word.hrefDown %}
+				<a href="{{word.hrefDown}}" >bas</a>
+			{% else  %}
+				<a aria-disabled >bas</a>
+			{%endif %}
+
+			{% if word.hrefRight %}
+				<a href="{{word.hrefRight}}" >droite</a>
+			{% else  %}
+				<a aria-disabled >droite</a>
+			{% endif %}
+
+			{% if word.hrefLeft %}
+				<a href="{{word.hrefLeft}}" >gauche</a>
+			{% else  %}
+				<a aria-disabled >gauche</a>
+			{% endif %}
+			<p>{{word.x}}
+				{{word.y}}</p>
+		</main>
+	</body>
+</html>

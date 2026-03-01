@@ -1,13 +1,15 @@
 {
-  "name": "prout",
+  "name": "tilde",
   "version": "0.2.0",
   "engines": {
-    "node": "20.0.0"
+    "node": "^23.0.0"
   },
+  "workspaces": [
+    "morphogeneses/",
+    "persistes/"
+  ],
   "type": "module",
   "scripts": {
-    "dev": "eleventy --serve",
-    "build": "eleventy  --incremental",
     "deploy": "bash ./deploy.sh"
   },
   "devDependencies": {
