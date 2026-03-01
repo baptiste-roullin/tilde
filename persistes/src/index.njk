@@ -15,36 +15,41 @@ permalink: "{% if pagination.pageNumber == 0 %}/index.html{% else %}/{{ word.hre
 	</head>
 	<body >
 		<main>
-			<p>{{word.word}}</p>
-			{% if word.hrefUp %}
-				{% if pagination.pageNumber == 1 %}
-					<a href="/">haut</a>
-				{% else %}
-					<a href="{{word.hrefUp}}">haut</a>
+			<div class="section-1">
+				{% if word.hrefUp %}
+					{% if pagination.pageNumber == 1 %}
+						<a href="/">haut</a>
+					{% else %}
+						<a href="{{word.hrefUp}}">haut</a>
+					{% endif %}
+				{% else  %}
+					<a aria-disabled>haut</a>
+				{%endif %}
+			</div>
+
+			<div class="section-2">
+				{% if word.hrefLeft %}
+					<a href="{{word.hrefLeft}}" >gauche</a>
+				{% else  %}
+					<a aria-disabled >gauche</a>
 				{% endif %}
-			{% else  %}
-				<a aria-disabled>haut</a>
-			{%endif %}
-
-			{% if word.hrefDown %}
-				<a href="{{word.hrefDown}}" >bas</a>
-			{% else  %}
-				<a aria-disabled >bas</a>
-			{%endif %}
-
-			{% if word.hrefRight %}
-				<a href="{{word.hrefRight}}" >droite</a>
-			{% else  %}
-				<a aria-disabled >droite</a>
-			{% endif %}
-
-			{% if word.hrefLeft %}
-				<a href="{{word.hrefLeft}}" >gauche</a>
-			{% else  %}
-				<a aria-disabled >gauche</a>
-			{% endif %}
-			<p>{{word.x}}
-				{{word.y}}</p>
+				<h1>{{word.word}}</h1>
+				{% if word.hrefRight %}
+					<a href="{{word.hrefRight}}" >droite</a>
+				{% else  %}
+					<a aria-disabled >droite</a>
+				{% endif %}
+			</div>
+			<div class="section-3">
+				{% if word.hrefDown %}
+					<a href="{{word.hrefDown}}" >bas</a>
+				{% else  %}
+					<a aria-disabled >bas</a>
+				{%endif %}
+			</div>
 		</main>
+		<footer>
+			<p>Position : {{word.x}} × {{word.y}}</p>
+		</footer>
 	</body>
 </html>
