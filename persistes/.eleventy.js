@@ -54,8 +54,6 @@ export default function (config) {
 						}
 					}
 
-
-
 					//leftRight = wordsGrid[x  -1]
 					return {
 						word: word,
