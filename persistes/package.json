@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "eleventy --serve --quiet",
-    "build": "eleventy  --incremental"
+    "dev": "eleventy --config=./.eleventy.ts --serve --quiet",
+    "build": "eleventy --config=./.eleventy.ts  --incremental"
   },
   "keywords": [],
   "author": "",
