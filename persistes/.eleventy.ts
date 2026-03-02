@@ -3,122 +3,81 @@ import importedWords from "./src/words.js"
 export default function (config) {
 
 	config.addPassthroughCopy("./src/*.css")
-	let id = 0
+
 
 	config.addCollection("everything", async () => {
+		let map = {}
+		let duplicates = []
+		const grid = new Map()
+		function countDuplicates() {
 
 
-		// TODO algo duplicates
-		// return : {word: string, indexGlobal: number}
-
-		const duplicates = importedWords.flat().filter((item, index) => importedWords.indexOf(item) !== index)
-
-		let duplicate = ""
-		let numberOfHIts = 0
-		const wordsGrid = importedWords
-			.map((wordsList, x) => {
-				//on parcourt l'array d'array
-				return wordsList.map((word, y, array) => {
-					let down = ""
-					let up = ""
-					let right = ""
-					let left = ""
-
-					let wordObject = {
-						word: "",
-						hrefUp: "",
-						hrefDown: "",
-						hrefRight: "",
-						hrefLeft: "",
-						href: "",
-						d: id++,
-						x: x + 1,
-						y: y + 1,
-
-					}
+		}
+		importedWords.forEach((list, x, importedWords) => {
+			list.forEach((word, y) => {
 
 
+				const duplicateCounts = duplicates.reduce((total, x) => total + (x === word), 0)
+				if () {
+					var href = slugify(word) + ".html"
 
-					//on checke les liens verticaux à ajouter
-					// on check que l'item n'est pas le dernier de la liste
-					if (y < array.length - 1) {
-						// TODO algo duplicates
-						// if (wordsList[y + 1]).id == duplicates.includes(wordObject.id))
-						// setDiseambuigateLink()
-						// else
-						// wordObject.down = ...
 
-						down = `/${slugify(wordsList[y + 1])}.html`
-					}
-					else if (x < importedWords.length - 1) { // loop
-						word = word
-						down = `/${slugify(importedWords[x + 1][0])}.html`
-
-					}
-					// on check que l'item n'est pas le premier de laliste
-					if (y > 0) {
-						up = `/${slugify(wordsList[y - 1])}.html`
-					}
-
-					//on checke les liens horizontaux à ajouter
-					// en  vérifiant les colonnes de structure différente
-					// y > 0 : pour lien droite désactivé au niveau de "tu persistes"
-					if (x < importedWords.length - 1 && y > 0) {
-						var rightList = importedWords[x + 1]
-						if (y < rightList.length) {
-							right = `/${slugify(rightList[y])}.html`
-						}
-					}
-
-					if (x > 0) {
-						var leftList = importedWords[x - 1]
-						if (y < leftList.length) {
-							left = `/${slugify(leftList[y])}.html`
-						}
-					}
-					wordObject = {
+				} else {
+					var href = slugify(word) + ".html"
+				}
+				const value = (word ?
+					{
 						word: word,
-						hrefUp: up,
-						hrefDown: down,
-						hrefRight: right,
-						hrefLeft: left,
-						href: "",
-						d: id++,
-						x: x + 1,
-						y: y + 1,
+						hrefSelf: href
+					} : undefined)
+				grid.set(String(x).padStart(2, "0") + String(y).padStart(2, "0"), value)
 
+
+
+
+			})
+		})
+
+		grid.forEach((value, key, grid) => {
+			if (value) {
+				function gridGet(direction: string) {
+					const x = key.slice(0, 2)
+					const y = key.slice(2, 4)
+					let offsetPosition = ""
+					switch (direction) {
+						case "down":
+							offsetPosition = String(x) + String(Number(y) + 1)
+						case "up":
+							offsetPosition = String(x) + String(Number(y) - 1)
+						case "left":
+							offsetPosition = String(Number(x) - 1) + String(y)
+						case "right":
+							offsetPosition = String(Number(x) + 1) + String(y)
+						default:
+							break
 					}
-					//leftRight = importedWords[x  -1]
-					return wordObject
-				})
-			})
+					const newValue = grid.get(offsetPosition)
+					return newValue?.hrefSelf
+				}
 
-		//on aplatit pour avoir une seule liste pour générer toutes les pages facilement
-		// avec la `pagination` d'Eleventy
 
-		const flattenedWordsGrid = wordsGrid.flat()
-			.map((item, i, array) => {
 
-				// on gère les mots identiques en générant un href différent.
-				/*			const foundIndex = array.findIndex(
-								(t) => (t["word"] === item["word"]))
+				grid.set(key, {
+					// on reprend la valeur précédente
+					word: value?.word,
+					hrefSelf: value?.hrefSelf,
+					hrefUp: gridGet("up"),
+					hrefDown: gridGet("down"),
+					hrefRight: gridGet("right"),
+					hrefLeft: gridGet("left"),
+				}
+				)
+			}
+		})
+		//console.log(grid)
 
-							if (i !== foundIndex) {
-								if (duplicate === item.word) {
-									numberOfHIts++
-								}
-								else {
-									numberOfHIts = 0
-								}
-								duplicate = item.word
-								item.href = slugify(item.word + numberOfHIts)
-							} else {
-								item.href = slugify(item.word)
-							}*/
-				return item
-			})
+		return [...grid.values()]
 
-		return flattenedWordsGrid
 	})
 	return {
 		dir: {

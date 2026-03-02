@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "eleventy --config=./.eleventy.ts --serve --quiet",
+    "dev": "eleventy --config=./.eleventy.ts --serve ",
     "build": "eleventy --config=./.eleventy.ts  --incremental"
   },
   "keywords": [],
