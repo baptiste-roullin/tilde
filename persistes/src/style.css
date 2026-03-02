@@ -4,14 +4,36 @@ main {
 	align-items: center;
 	flex-direction: column;
 	gap: 1em;
-	font-size: 2em;
 }
+
+@media (min-width: 800px) {
+	body main {
+		font-size: 2em;
+		gap
+	}
+
+
+}
+
+@media (max-width: 799px) {
+	body main {
+		font-size: 1.1em;
+		gap: .5em
+	}
+		main .section-2 {
+			gap: 1em;
+
+	}
+}
+
+
 
 body, html {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center
 }
 
 .section-2 {

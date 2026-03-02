@@ -92,7 +92,6 @@ export default function (config) {
 				}
 				return item
 			})
-		console.log(res)
 
 		return res
 	})
