@@ -18,9 +18,9 @@ permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf
 			<div class="section-1">
 				{% if word.hrefUp %}
 					{% if pagination.pageNumber == 1 %}
-						<a href="{{meta.baseURL}}">Haut</a>
+						<a href="{{meta.baseURL}}.html">Haut</a>
 					{% else %}
-						<a href="{{meta.baseURL}}{{word.hrefUp}}">Haut</a>
+						<a href="{{meta.baseURL}}{{word.hrefUp}}.html">Haut</a>
 					{% endif %}
 				{% else  %}
 					<a aria-disabled>Haut</a>
@@ -29,20 +29,20 @@ permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf
 
 			<div class="section-2">
 				{% if word.hrefLeft %}
-					<a href="{{meta.baseURL}}{{word.hrefLeft}}" >Gauche</a>
+					<a href="{{meta.baseURL}}{{word.hrefLeft}}.html" >Gauche</a>
 				{% else  %}
 					<a aria-disabled >Gauche</a>
 				{% endif %}
 				<h1>{{word.word}}</h1>
 				{% if word.hrefRight %}
-					<a href="{{meta.baseURL}}{{word.hrefRight}}" >Droite</a>
+					<a href="{{meta.baseURL}}{{word.hrefRight}}.html" >Droite</a>
 				{% else  %}
 					<a aria-disabled >Droite</a>
 				{% endif %}
 			</div>
 			<div class="section-3">
 				{% if word.hrefDown %}
-					<a href="{{meta.baseURL}}{{word.hrefDown}}" >Bas</a>
+					<a href="{{meta.baseURL}}{{word.hrefDown}}.html" >Bas</a>
 				{% else  %}
 					<a aria-disabled >Bas</a>
 				{%endif %}
@@ -55,7 +55,7 @@ permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf
 
 		<dialog closedby="any">
 			<p> Source : <i>L'Adresse - Les rendez-vous du déversoir</i> de Arthur Teboul, page 100.</p>
-			<p>Page choisie au hasard et soumise par <a href="/~slowpy/">Slowpy.</a>
+			<p>Page choisie au hasard et soumise par <a href="/~slowpy/">slowpy.</a>
 			</p>
 			<button autofocus>Fermer</button>
 		</dialog>
