@@ -3,7 +3,7 @@ pagination:
   data: collections.everything
   size: 1
   alias: word
-permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf }}{% endif %}.html"
+permalink: "/{% if pagination.pageNumber == 0 %}index.html{% else %}/{{ word.hrefSelf }}.html{% endif %}"
 ---
 <!DOCTYPE html>
 <html lang="fr">
