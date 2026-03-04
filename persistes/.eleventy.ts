@@ -3,16 +3,18 @@ import akMap from "./src/akMap.js"
 
 import importedWords from "./src/data/words.js"
 
-
 export default function (config) {
+	
 	// length of columns
 	let columnLength: number[] = []
 	config.addPassthroughCopy("./src/*.css")
 
 	config.addCollection("everything", async () => {
+		
 		let duplicates: string[] = []
 		const grid = new akMap()
 
+		//Première passe pour lister tous les doublons
 		importedWords.flat().forEach((element, index, array) => {
 			if (array.indexOf(element) !== index) {
 				duplicates.push(element)
@@ -23,11 +25,22 @@ export default function (config) {
 			columnLength[x] = column.length
 			column.forEach((word, y) => {
 
+
+// la page a cette forme : 
+// mot  null null null
+// mot  mot  mot  mot 
+// mot  mot  mot  mot 
+// mot  mot  mot  mot
+// (...)
+// mot  mot  mot  null 
+// mot  mot  mot  null
+				
+				// donc on compense en utilisant des coordonnées décalée, passé la première ligne.  
 				var realY = y
 				if (x > 0) {
-					realY = y + 1 // to account for the crooked array
+					realY = y + 1
 				}
-				//const duplicateCounts = duplicates.reduce((total, x) => total + (x === word), 0)
+				// si doublon, on ajoute un incrément croissant à l'URL
 				if (duplicates.includes(word)) {
 					var href = slugify(word) + (y + 1)
 
@@ -39,6 +52,7 @@ export default function (config) {
 						word: word,
 						hrefSelf: href
 					} : null)
+				// les cases vides seront peuplées, mais à null
 				grid.set([x, realY], value)
 			})
 		})
@@ -48,28 +62,28 @@ export default function (config) {
 				function gridGet(direction: string) {
 					const x = key[0]
 					const y = key[1]
-					let offsetPosition = []
+					let adjacentPosition = []
 
 					switch (direction) {
 						case "up":
-							offsetPosition = [x, y - 1]
+							adjacentPosition = [x, y - 1]
 							break
 						case "down":
-							offsetPosition = [x, y + 1]
+							adjacentPosition = [x, y + 1]
 							break
 						case "left":
-							offsetPosition = [x - 1, y]
+							adjacentPosition = [x - 1, y]
 							break
 						case "right":
-							offsetPosition = [x + 1, y]
+							adjacentPosition = [x + 1, y]
 							break
 						default:
-							offsetPosition = [null, null]
+							adjacentPosition = [null, null]
 							break
 					}
-					let offsetItem = grid.get(offsetPosition)
+					let offsetItem = grid.get(adjacentPosition)
 					if (direction === 'down' && !offsetItem) { // loop to next column, top row
-						offsetItem = grid.get([x + 1, 1]) // "1" is hardcoded
+						offsetItem = grid.get([x + 1, 1]) // "1" is hardcoded, same reason as realyY above
 					}
 					if (direction === 'up' && !offsetItem) {
 						offsetItem = grid.get([x - 1, columnLength[x - 1] - 1]) // loop back to previous column, bottom row
@@ -85,6 +99,7 @@ export default function (config) {
 					hrefDown: gridGet("down"),
 					hrefRight: gridGet("right"),
 					hrefLeft: gridGet("left"),
+					// sert uniquement pour afficher les coordonnées à l'utilisateur
 					x: key[0] + 1,
 					y: key[1] + 1
 				}
@@ -93,6 +108,7 @@ export default function (config) {
 		})
 		//	console.log([...grid.values()])
 
+		// reverse() parce que la lib utilisée pour le dictionnaire semble avoir un ordre d'insertion inversé
 		return [...grid.values()].reverse()
 
 	})
