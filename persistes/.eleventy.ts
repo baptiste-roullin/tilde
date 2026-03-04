@@ -1,36 +1,45 @@
 import slugify from "@sindresorhus/slugify"
-import importedWords from "./src/words.js"
-export default function (config) {
+import akMap from "./src/akMap.js"
 
+import importedWords from "./src/data/words.js"
+
+
+export default function (config) {
+	// length of columns
+	let columnLength: number[] = []
 	config.addPassthroughCopy("./src/*.css")
 
-
 	config.addCollection("everything", async () => {
-		let map = {}
-		let duplicates = []
-		const grid = new Map()
-		function countDuplicates() {
+		let duplicates: string[] = []
+		const grid = new akMap()
 
+		importedWords.flat().forEach((element, index, array) => {
+			if (array.indexOf(element) !== index) {
+				duplicates.push(element)
+			}
+		})
 
-		}
-		importedWords.forEach((list, x, importedWords) => {
-			list.forEach((word, y) => {
+		importedWords.forEach((column, x, importedWords) => {
+			columnLength[x] = column.length
+			column.forEach((word, y) => {
 
-
-				const duplicateCounts = duplicates.reduce((total, x) => total + (x === word), 0)
-				if () {
-					var href = slugify(word) + ".html"
-
+				var realY = y
+				if (x > 0) {
+					realY = y + 1 // to account for the crooked array
+				}
+				//const duplicateCounts = duplicates.reduce((total, x) => total + (x === word), 0)
+				if (duplicates.includes(word)) {
+					var href = slugify(word) + (y + 1)
 
 				} else {
-					var href = slugify(word) + ".html"
+					var href = slugify(word)
 				}
 				const value = (word ?
 					{
 						word: word,
 						hrefSelf: href
-					} : undefined)
-				grid.set(String(x).padStart(2, "0") + String(y).padStart(2, "0"), value)
+					} : null)
+				grid.set([x, realY], value)
 
 
 
@@ -41,25 +50,36 @@ export default function (config) {
 		grid.forEach((value, key, grid) => {
 			if (value) {
 				function gridGet(direction: string) {
-					const x = key.slice(0, 2)
-					const y = key.slice(2, 4)
-					let offsetPosition = ""
+					const x = key[0]
+					const y = key[1]
+					let offsetPosition = []
+
 					switch (direction) {
-						case "down":
-							offsetPosition = String(x) + String(Number(y) + 1)
 						case "up":
-							offsetPosition = String(x) + String(Number(y) - 1)
+							offsetPosition = [x, y - 1]
+							break
+						case "down":
+							offsetPosition = [x, y + 1]
+							break
 						case "left":
-							offsetPosition = String(Number(x) - 1) + String(y)
+							offsetPosition = [x - 1, y]
+							break
 						case "right":
-							offsetPosition = String(Number(x) + 1) + String(y)
+							offsetPosition = [x + 1, y]
+							break
 						default:
+							offsetPosition = [null, null]
 							break
 					}
-					const newValue = grid.get(offsetPosition)
-					return newValue?.hrefSelf
+					let offsetItem = grid.get(offsetPosition)
+					if (direction === 'down' && !offsetItem) { // loop to next column, top row
+						offsetItem = grid.get([x + 1, 1]) // "1" is hardcoded
+					}
+					if (direction === 'up' && !offsetItem) {
+						offsetItem = grid.get([x - 1, columnLength[x]]) // loop back to previous column, bottom row
+					}
+					return offsetItem?.hrefSelf // directions qui n'existent pas : retourne undefined
 				}
-
 
 
 				grid.set(key, {
@@ -70,19 +90,22 @@ export default function (config) {
 					hrefDown: gridGet("down"),
 					hrefRight: gridGet("right"),
 					hrefLeft: gridGet("left"),
+					x: key[0] + 1,
+					y: key[1] + 1
 				}
 				)
 			}
 		})
-		//console.log(grid)
+		//	console.log([...grid.values()])
 
-		return [...grid.values()]
+		return [...grid.values()].reverse()
 
 	})
 	return {
 		dir: {
 			input: "src",
 			output: "../public_html/persistes",
+			data: "data"
 		},
 		passthroughFileCopy: true,
 		templateFormats: ["html", "njk",],
