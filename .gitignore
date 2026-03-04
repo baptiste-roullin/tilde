@@ -1,9 +1,10 @@
 
 public_html/morphogeneses/
 public_html/persistes/
-
+deploy.sh
 .DS_Store
 **/.DS_Store
+.env
 
 # Logs
 logs
@@ -20,6 +21,3 @@ node_modules/
 
 # Optional REPL history
 .node_repl_history
-
-# Output of 'npm pack'
-*.tgz

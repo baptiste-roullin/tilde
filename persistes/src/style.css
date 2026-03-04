@@ -57,36 +57,31 @@ footer {
 }
 
 @view-transition {
-	navigation: none;
+	navigation: auto;
 	}
 
-@keyframes move-out {
-	from {
-		transform: translateY(0%);
-	}
-
-	to {
-		transform: translateY(-100%);
-	}
+* Keyframes for blending when there are 2 images */
+@keyframes -ua-mix-blend-mode-plus-lighter {
+  from {
+    mix-blend-mode: plus-lighter;
+  }
+  to {
+    mix-blend-mode: plus-lighter;
+  }
 }
 
-@keyframes move-in {
-	from {
-		transform: translateY(100%);
-	}
-
-	to {
-		transform: translateY(0%);
-	}
+@keyframes -ua-view-transition-fade-in {
+  from {
+    opacity: 0;
+  }
 }
-
 /* Apply the custom animation to the old and new page states */
 ::view-transition-old(header) {
-	animation: 0.2s ease-in both move-out;
+	animation: 0.2s ease-in both -ua-mix-blend-mode-plus-lighter;
 }
 
 ::view-transition-new(header) {
-	animation: 0.2s ease-in both move-in;
+	animation: 0.2s ease-in both -ua-mix-blend-mode-plus-lighter;
 }
 h1 {
 	view-transition-name: header
