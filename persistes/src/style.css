@@ -12,9 +12,6 @@ main {
 		gap: .5em
 	}
 
-	body main .section-2 a {
-	font-size: .7em
-	}
 
 
 }
@@ -24,13 +21,16 @@ main {
 		font-size: 1.1em;
 		gap: .5em
 	}
-		main .section-2 {
-			gap: 1em;
+	main .section-2 {
+		gap: 1em;
 
 	}
 }
 
 
+body main .section-2 a {
+font-size: .7em
+}
 
 body, html {
   height: 100%;
