@@ -11,9 +11,6 @@ main {
 		font-size: 2em;
 		gap: .5em
 	}
-
-
-
 }
 
 @media (max-width: 799px) {
