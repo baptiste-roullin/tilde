@@ -4,8 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "eleventy --serve --quiet",
-    "build": "eleventy  --incremental"
+    "dev": "node --env-file=.env --experimental-strip-types ../node_modules/.bin/eleventy --quiet --config=.eleventy.ts --serve --incremental",
+    "build": "node --env-file=.env --experimental-strip-types ../node_modules/.bin/eleventy --config=.eleventy.ts"
   },
   "keywords": [],
   "author": "",

@@ -3,7 +3,7 @@ pagination:
   data: collections.everything
   size: 1
   alias: word
-permalink: "{% if pagination.pageNumber == 0 %}/index.html{% else %}/{{ word.href }}.html{% endif %}"
+permalink: "{{meta.baseURL}}{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf }}{% endif %}.html"
 ---
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,16 +11,16 @@ permalink: "{% if pagination.pageNumber == 0 %}/index.html{% else %}/{{ word.hre
 		<meta charset="utf-8"/>
 		<title>Tu persistes ↢↣</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/~boucan/persistes/style.css">
+		<link rel="stylesheet" href="{{meta.baseURL}}/style.css">
 	</head>
 	<body >
 		<main>
 			<div class="section-1">
 				{% if word.hrefUp %}
 					{% if pagination.pageNumber == 1 %}
-						<a href="/~boucan/persistes/">haut</a>
+						<a href="{{meta.baseURL}}/">haut</a>
 					{% else %}
-						<a href="/~boucan/persistes/{{word.hrefUp}}">haut</a>
+						<a href="{{meta.baseURL}}/{{word.hrefUp}}">haut</a>
 					{% endif %}
 				{% else  %}
 					<a aria-disabled>haut</a>
@@ -29,20 +29,20 @@ permalink: "{% if pagination.pageNumber == 0 %}/index.html{% else %}/{{ word.hre
 
 			<div class="section-2">
 				{% if word.hrefLeft %}
-					<a href="/~boucan/persistes/{{word.hrefLeft}}" >gauche</a>
+					<a href="{{meta.baseURL}}/{{word.hrefLeft}}" >gauche</a>
 				{% else  %}
 					<a aria-disabled >gauche</a>
 				{% endif %}
 				<h1>{{word.word}}</h1>
 				{% if word.hrefRight %}
-					<a href="/~boucan/persistes/{{word.hrefRight}}" >droite</a>
+					<a href="{{meta.baseURL}}/{{word.hrefRight}}" >droite</a>
 				{% else  %}
 					<a aria-disabled >droite</a>
 				{% endif %}
 			</div>
 			<div class="section-3">
 				{% if word.hrefDown %}
-					<a href="/~boucan/persistes/{{word.hrefDown}}" >bas</a>
+					<a href="{{meta.baseURL}}/{{word.hrefDown}}" >bas</a>
 				{% else  %}
 					<a aria-disabled >bas</a>
 				{%endif %}
