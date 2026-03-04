@@ -3,7 +3,7 @@ pagination:
   data: collections.everything
   size: 1
   alias: word
-permalink: "/{% if pagination.pageNumber == 0 %}index.html{% else %}/{{ word.hrefSelf }}.html{% endif %}"
+permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf }}{% endif %}.html"
 ---
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,7 +18,7 @@ permalink: "/{% if pagination.pageNumber == 0 %}index.html{% else %}/{{ word.hre
 			<div class="section-1">
 				{% if word.hrefUp %}
 					{% if pagination.pageNumber == 1 %}
-						<a href="{{meta.baseURL}}.html">Haut</a>
+						<a href="{{meta.baseURL}}/">Haut</a>
 					{% else %}
 						<a href="{{meta.baseURL}}{{word.hrefUp}}.html">Haut</a>
 					{% endif %}
