@@ -18,38 +18,71 @@ permalink: "{{meta.baseURL}}{% if pagination.pageNumber == 0 %}index{% else %}/{
 			<div class="section-1">
 				{% if word.hrefUp %}
 					{% if pagination.pageNumber == 1 %}
-						<a href="{{meta.baseURL}}/">haut</a>
+						<a href="{{meta.baseURL}}/">Haut</a>
 					{% else %}
-						<a href="{{meta.baseURL}}/{{word.hrefUp}}">haut</a>
+						<a href="{{meta.baseURL}}/{{word.hrefUp}}">Haut</a>
 					{% endif %}
 				{% else  %}
-					<a aria-disabled>haut</a>
+					<a aria-disabled>Haut</a>
 				{%endif %}
 			</div>
 
 			<div class="section-2">
 				{% if word.hrefLeft %}
-					<a href="{{meta.baseURL}}/{{word.hrefLeft}}" >gauche</a>
+					<a href="{{meta.baseURL}}/{{word.hrefLeft}}" >Gauche</a>
 				{% else  %}
-					<a aria-disabled >gauche</a>
+					<a aria-disabled >Gauche</a>
 				{% endif %}
 				<h1>{{word.word}}</h1>
 				{% if word.hrefRight %}
-					<a href="{{meta.baseURL}}/{{word.hrefRight}}" >droite</a>
+					<a href="{{meta.baseURL}}/{{word.hrefRight}}" >Droite</a>
 				{% else  %}
-					<a aria-disabled >droite</a>
+					<a aria-disabled >Droite</a>
 				{% endif %}
 			</div>
 			<div class="section-3">
 				{% if word.hrefDown %}
-					<a href="{{meta.baseURL}}/{{word.hrefDown}}" >bas</a>
+					<a href="{{meta.baseURL}}/{{word.hrefDown}}" >Bas</a>
 				{% else  %}
-					<a aria-disabled >bas</a>
+					<a aria-disabled >Bas</a>
 				{%endif %}
 			</div>
 		</main>
 		<footer>
 			<p>Position : {{word.x}} × {{word.y}}</p>
+			<a id="open" href="#" role=button>À Propos</a>
 		</footer>
-	</body>
+
+		<dialog closedby="any">
+			<p>Source : <i>L'Adresse - Les rendez-vous du déversoir</i> de Arthur Teboul, page 100.</p>
+			<p>Page choisie au hasard et soumise par <a href="/~slowpy/">Slowpy</a>
+			</p>
+		</p>
+		<button autofocus>Fermer</button>
+	</dialog>
+</body>
+
+<script>
+
+	const main = document.getElementById("main")
+
+	function modal() {
+		const dialog = document.querySelector("dialog")
+		const showButton = document.querySelector("#open")
+		const closeButton = document.querySelector("dialog button")
+
+		showButton.addEventListener("click", (e) => {
+			e.preventDefault()
+			dialog.showModal()
+		})
+
+		closeButton.addEventListener("click", () => {
+			dialog.close()
+		})
+	}
+
+	document.addEventListener("DOMContentLoaded", () => {
+		modal()
+	})
+</script>
 </html>

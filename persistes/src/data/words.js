@@ -47,7 +47,6 @@ export default [
 		"Irisés",
 		"Pour suspendre",
 		"Le grisou",
-		"On continue",
 		"Le train-train",
 		"Le sursaut",
 		"Qui coulisse",

@@ -72,7 +72,7 @@ export default function (config) {
 						offsetItem = grid.get([x + 1, 1]) // "1" is hardcoded
 					}
 					if (direction === 'up' && !offsetItem) {
-						offsetItem = grid.get([x - 1, columnLength[x]]) // loop back to previous column, bottom row
+						offsetItem = grid.get([x - 1, columnLength[x - 1] - 1]) // loop back to previous column, bottom row
 					}
 					return offsetItem?.hrefSelf // directions qui n'existent pas : retourne undefined
 				}

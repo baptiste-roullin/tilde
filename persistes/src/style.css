@@ -9,7 +9,11 @@ main {
 @media (min-width: 800px) {
 	body main {
 		font-size: 2em;
-		gap
+		gap: .5em
+	}
+
+	body main .section-2 a {
+	font-size: .7em
 	}
 
 
@@ -36,6 +40,10 @@ body, html {
   text-align: center
 }
 
+body {
+	gap: 3em
+}
+
 .section-2 {
 	display: flex;
 	justify-content: center;
@@ -47,7 +55,8 @@ body, html {
 footer {
   justify-content: center;
   display: flex;
-  top: 1em;
+  flex-direction: column;
+  gap: .5em
 }
 
 @view-transition {
