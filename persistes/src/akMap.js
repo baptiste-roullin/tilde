@@ -4,7 +4,6 @@ github.com/anko/array-keyed-map/
 
 akMap for Array keyd Map. Accepts only arrays as keys.
 
-The insertion order semems reversed from native Map?
  */
 
 /*
