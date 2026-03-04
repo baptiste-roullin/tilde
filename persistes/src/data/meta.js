@@ -1,10 +1,3 @@
-let baseURL = ""
-if (process.env['NODE_ENV'] !== "dev") {
-	baseURL = "/~boucan/persistes"
+export default {
+	baseURL: (process.env['NODE_ENV'] !== "dev" ? "/~boucan/persistes/" : "/")
 }
-else {
-	baseURL = "/"
-
-}
-
-export default baseURL
