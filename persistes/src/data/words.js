@@ -21,6 +21,7 @@ export default [
 		"Une histoire"
 	],
 	[
+		null,
 		"À raconter",
 		"J'y reviens",
 		"J'y plongeais",
@@ -41,6 +42,7 @@ export default [
 		"Qui dure longtemps"
 	],
 	[
+		null,
 		"Nous allons",
 		"Faire la course",
 		"Sans penser",
@@ -60,8 +62,24 @@ export default [
 		"Sur le pas",
 		"Des combats",
 	],
-	["Mais",
+	[
+		null,
+		"Mais",
 		"On continue",
 		"On continue",
-		"On continue"]
+		"On continue",
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+	]
 ]
