@@ -17,10 +17,17 @@ permalink: carte.html
 					<p class="column">Colonne № {{loop.index}}</p>
 					{% for item in column %}
 						{% if item.word %}
-							<p>
-								<span>{{item.word}}</span>
-								<a href="{{meta.baseURL}}{{item.hrefSelf}}.html">↣</a>
-							</p>
+							{% if loop.index == 1 %}
+								<p>
+									<span>{{item.word}}</span>
+									<a href="{{meta.baseURL}}">↣</a>
+								</p>
+							{% else  %}
+								<p>
+									<span>{{item.word}}</span>
+									<a href="{{meta.baseURL}}{{item.hrefSelf}}.html">↣</a>
+								</p>
+							{% endif %}
 						{% else  %}
 							<p>​</p>
 
