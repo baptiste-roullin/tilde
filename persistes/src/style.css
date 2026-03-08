@@ -57,6 +57,21 @@ footer {
   gap: .5em
 }
 
+@media (max-width: 999px) {
+html.map, html.map body {
+		height: auto;
+	}
+	html.map main .column {
+		font-weight: bold
+	}
+
+	html.map body main{
+		display: flex;
+		gap: 2em
+	}
+
+}
+
 @media (min-width: 1000px) {
 
 	html.map, html.map body {
@@ -88,7 +103,11 @@ footer {
 	}
 	html.map main div a {
 		font-size: .8em;
-
 }
+
+	html.map main .column {
+		display:none;
+	}
+
 
 }

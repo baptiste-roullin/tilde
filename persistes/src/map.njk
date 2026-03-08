@@ -14,6 +14,7 @@ permalink: carte.html
 
 			{% for column in collections.map %}
 				<div>
+					<p class="column">Colonne № {{loop.index}}</p>
 					{% for item in column %}
 						{% if item.word %}
 							<p>
