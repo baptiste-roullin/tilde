@@ -3,36 +3,51 @@ import akMap from "./src/akMap.js"
 
 import importedWords from "./src/data/words.js"
 
+interface Cell {
+	word: string | null,
+	hrefSelf: string | null,
+	hrefUp?: string,
+	hrefDown?: string,
+	hrefRight?: string,
+	hrefLeft?: string,
+	x?: number,
+	y?: number
+
+}
+
 export default function (config) {
 	config.addPassthroughCopy("./src/*.css")
 
 	// length of columns
 	let columnsLength: number[] = []
+	let duplicates: string[] = []
+	const grid = new akMap()
+	let map: Cell[][] = []
 
-	function gridGet(direction: string, key: number[], grid: akMap) {
+	function getAdjacent(direction: string, key: number[], grid: akMap) {
 		const x = key[0]
 		const y = key[1]
 		const nextColumn = importedWords[x + 1]
 		if (nextColumn) {
 			var firstFilledRowOnNextColumn = nextColumn.findIndex(el => el) // always returns "1"
 		}
-		let offsetPosition = []
+		let adjacentPosition = []
 
 		switch (direction) {
 			case "up":
-				offsetPosition = [x, y - 1]
+				adjacentPosition = [x, y - 1]
 				break
 			case "down":
-				offsetPosition = [x, y + 1]
+				adjacentPosition = [x, y + 1]
 				break
 			case "left":
-				offsetPosition = [x - 1, y]
+				adjacentPosition = [x - 1, y]
 				break
 			case "right":
-				offsetPosition = [x + 1, y]
+				adjacentPosition = [x + 1, y]
 				break
 			default:
-				offsetPosition = [null, null]
+				adjacentPosition = [null, null]
 				break
 		}
 
@@ -40,87 +55,99 @@ export default function (config) {
 			console.log(key, direction)
 		}
 
-		let offsetItem = grid.get(offsetPosition)
-		if (!offsetItem && ((direction === 'right') || (direction === 'left'))) {
+		let adjacentItem = grid.get(adjacentPosition)
+		if (!adjacentItem && ((direction === 'right') || (direction === 'left'))) {
 			return null
 		}
 		// offset peut être undefined (hors de la grille)
 		// ou bien offset.word peut être null (dans la grille mais cellule vide)
-		if (direction === 'down' && (!offsetItem || !offsetItem?.word) && y === columnsLength[x] - 1) { // loop to next column, first filled row
-			offsetItem = grid.get([x + 1, firstFilledRowOnNextColumn])
+		if (direction === 'down' && (!adjacentItem || !adjacentItem?.word) && y === columnsLength[x] - 1) { // loop to next column, first filled row
+			adjacentItem = grid.get([x + 1, firstFilledRowOnNextColumn])
 		}
-		if (direction === 'up' && (!offsetItem || !offsetItem?.word) && x !== 0) {
-			offsetItem = grid.get([x - 1, columnsLength[x - 1] - 1]) // loop back to previous column, bottom row
+		if (direction === 'up' && (!adjacentItem || !adjacentItem?.word) && x !== 0) {
+			adjacentItem = grid.get([x - 1, columnsLength[x - 1] - 1]) // loop back to previous column, bottom row
 		}
-		return offsetItem?.hrefSelf // directions qui n'existent pas : retourne undefined
+		return adjacentItem?.hrefSelf // directions qui n'existent pas : retourne undefined
 	}
 
-	config.addCollection("everything", async () => {
-		let duplicates: string[] = []
-		const grid = new akMap()
+	//Première passe pour lister tous les doublons
+	importedWords.flat().forEach((element, index, array) => {
+		if (array.indexOf(element) !== index) {
+			duplicates.push(element)
+		}
+	})
 
-		//Première passe pour lister tous les doublons
-		importedWords.flat().forEach((element, index, array) => {
-			if (array.indexOf(element) !== index) {
-				duplicates.push(element)
-			}
-		})
 
-		importedWords.forEach((column, x, importedWords) => {
-			columnsLength[x] = column.length
-			column.forEach((word, y) => {
-				// la page a cette forme :
-				// mot  null null null
-				// mot  mot  mot  mot
-				// mot  mot  mot  mot
-				// mot  mot  mot  mot
-				// (...)
-				// mot  mot  mot  null
-				// mot  mot  mot  null
+	// on crée la grille et on la peuple avec mot et lien vers soi-même.
+	importedWords.forEach((column, x, importedWords) => {
+		columnsLength[x] = column.length
+		map.push([])
+		column.forEach((word, y) => {
+			// la page a cette forme :
+			// mot  null null null
+			// mot  mot  mot  mot
+			// mot  mot  mot  mot
+			// mot  mot  mot  mot
+			// (...)
+			// mot  mot  mot  null
+			// mot  mot  mot  null
 
-				if (word) {
-					if (duplicates.includes(word)) {
-						var href = slugify(word) + y // prevent permalink collision
-					} else {
-						var href = slugify(word)
-					}
+			if (word) {
+				if (duplicates.includes(word)) {
+					var href = slugify(word) + y // prevent permalink collision
+				} else {
+					var href = slugify(word)
 				}
-				const value = (word ?
-					{
-						word: word,
-						hrefSelf: href
-					} : { word: null })
-				grid.set([x, y], value)
-			})
-		})
-
-		grid.forEach((value: Record<string, string>, key: number[], grid: akMap) => {
-
-			if (value.word === null) {
-				grid.set(key, {
-					// on reprend la valeur précédente
+			}
+			const value: Cell = (word ?
+				{
+					word: word,
+					hrefSelf: href
+				} : {
 					word: null,
-					x: key[0] + 1,
-					y: key[1] + 1
-				}
-				)
-			}
-			else {
-				grid.set(key, {
-					// on reprend la valeur précédente
-					word: value?.word,
-					hrefSelf: value?.hrefSelf,
-					hrefUp: gridGet("up", key, grid),
-					hrefDown: gridGet("down", key, grid),
-					hrefRight: gridGet("right", key, grid),
-					hrefLeft: gridGet("left", key, grid),
-					// sert uniquement pour afficher les coordonnées à l'utilisateur
-					x: key[0] + 1,
-					y: key[1] + 1
-				}
-				)
-			}
+					hrefSelf: null
+				})
+			grid.set([x, y], value)
+			map[x].push(value)
 		})
+	})
+
+	// On parcoure la grille précédemment créée pour générer les liens vers les items adjacents.
+	grid.forEach((value: Record<string, string>, key: number[], grid: akMap) => {
+
+		if (value.word === null) {
+			grid.set(key, {
+				// on reprend la valeur précédente
+				word: null,
+				x: key[0] + 1,
+				y: key[1] + 1
+			}
+			)
+		}
+		else {
+			grid.set(key, {
+				// on reprend la valeur précédente
+				word: value?.word,
+				hrefSelf: value?.hrefSelf,
+				hrefUp: getAdjacent("up", key, grid),
+				hrefDown: getAdjacent("down", key, grid),
+				hrefRight: getAdjacent("right", key, grid),
+				hrefLeft: getAdjacent("left", key, grid),
+				// sert uniquement pour afficher les coordonnées à l'utilisateur
+				x: key[0] + 1,
+				y: key[1] + 1
+			}
+			)
+		}
+	})
+
+
+	config.addCollection("map", async () => {
+		//console.log([...grid.values()])
+		return map
+
+	})
+	config.addCollection("everything", async () => {
 		//console.log([...grid.values()])
 		return [...grid.values()].filter(item => item.word !== null).reverse()
 
