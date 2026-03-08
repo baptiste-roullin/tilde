@@ -34,7 +34,8 @@ body, html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center
+  text-align: center;
+  background-color: #f5f7f0
 }
 
 body {
@@ -56,37 +57,38 @@ footer {
   gap: .5em
 }
 
-@view-transition {
-	navigation: auto;
+@media (min-width: 1000px) {
+
+	html.map, html.map body {
+		height: auto;
+	}
+	html.map body main{
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-gap: 3em;
+		font-size: 1.4em;
+		align-items: flex-start;
+		margin: auto;
+		justify-content: center;
+
 	}
 
+	html.map main div {
+		display: flex;
+		flex-direction:column;
+		gap: 0em;
 
-	@keyframes move-out {
-  from {
-    transform: translateY(0%);
-  }
+	}
+	html.map main div p {
+		display: flex;
+		flex-direction:row;
+		gap: .5em;
+	    align-items: baseline;
+		margin-bottom: .6em;
+	}
+	html.map main div a {
+		font-size: .8em;
 
-  to {
-    transform: translateY(-100%);
-  }
 }
 
-@keyframes move-in {
-  from {
-    transform: translateY(100%);
-  }
-
-  to {
-    transform: translateY(0%);
-  }
-}
-
-/* Apply the custom animation to the old and new page states */
-
-::view-transition-old(root) {
-  animation: 0.4s ease-in both move-out;
-}
-
-::view-transition-new(root) {
-  animation: 0.4s ease-in both move-in;
 }

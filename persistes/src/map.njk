@@ -1,0 +1,36 @@
+---
+
+---
+<!DOCTYPE html>
+<html lang="fr" class="map">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Tu persistes ↢↣</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="{{meta.baseURL}}style.css">
+	</head>
+	<body>
+		<main >
+
+			{% for column in collections.map %}
+				<div>
+					{% for item in column %}
+						{% if item.word %}
+							<p>
+								<span>{{item.word}}</span>
+								<a href="/{{item.hrefSelf}}">↣</a>
+							</p>
+
+						{% endif %}
+					{% endfor %}
+				</div>
+
+			{% endfor %}
+		</main>
+		<footer>
+			<a href="/">Retour</a>
+		</footer>
+
+	</body>
+
+</html>

@@ -2,8 +2,8 @@
 pagination:
   data: collections.everything
   size: 1
-  alias: word
-permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf }}{% endif %}.html"
+  alias: item
+permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ item.hrefSelf }}{% endif %}.html"
 ---
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,11 +16,11 @@ permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf
 	<body>
 		<main>
 			<div class="section-1">
-				{% if word.hrefUp %}
+				{% if item.hrefUp %}
 					{% if pagination.pageNumber == 1 %}
 						<a href="{{meta.baseURL}}">Haut</a>
 					{% else %}
-						<a href="{{meta.baseURL}}{{word.hrefUp}}.html">Haut</a>
+						<a href="{{meta.baseURL}}{{item.hrefUp}}.html">Haut</a>
 					{% endif %}
 				{% else  %}
 					<a aria-disabled>Haut</a>
@@ -28,35 +28,38 @@ permalink: "/{% if pagination.pageNumber == 0 %}index{% else %}/{{ word.hrefSelf
 			</div>
 
 			<div class="section-2">
-				{% if word.hrefLeft %}
-					<a href="{{meta.baseURL}}{{word.hrefLeft}}.html" >Gauche</a>
+				{% if item.hrefLeft %}
+					<a href="{{meta.baseURL}}{{item.hrefLeft}}.html" >Gauche</a>
 				{% else  %}
 					<a aria-disabled >Gauche</a>
 				{% endif %}
-				<h1>{{word.word}}</h1>
-				{% if word.hrefRight %}
-					<a href="{{meta.baseURL}}{{word.hrefRight}}.html" >Droite</a>
+				<h1>{{item.word}}</h1>
+				{% if item.hrefRight %}
+					<a href="{{meta.baseURL}}{{item.hrefRight}}.html" >Droite</a>
 				{% else  %}
 					<a aria-disabled >Droite</a>
 				{% endif %}
 			</div>
 			<div class="section-3">
-				{% if word.hrefDown %}
-					<a href="{{meta.baseURL}}{{word.hrefDown}}.html" >Bas</a>
+				{% if item.hrefDown %}
+					<a href="{{meta.baseURL}}{{item.hrefDown}}.html" >Bas</a>
 				{% else  %}
 					<a aria-disabled >Bas</a>
 				{%endif %}
 			</div>
 		</main>
 		<footer>
-			<p>Position : {{word.x}} × {{word.y}}</p>
-			<a id="open" href="#" role=button>À Propos</a>
+			<p>Position : {{item.x}} × {{item.y}}</p>
+			<p>
+				<a id="open" href="#" role=button>À Propos</a> — <a href="/map">Carte</a>
+			</p>
 		</footer>
 
 		<dialog closedby="any">
 			<p> Source : <i>L'Adresse - Les rendez-vous du déversoir</i> de Arthur Teboul, page 100.</p>
 			<p>Page choisie au hasard avec <a href="/~slowpy/">slowpy.</a>
 			</p>
+			<p>Le format d'origine de la page est repris <a href="/map">par là</a>.</p>
 			<button autofocus>Fermer</button>
 		</dialog>
 	</body>
